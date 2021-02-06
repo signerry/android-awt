@@ -16,7 +16,7 @@ repositories {
 
 ```
 dependencies {
-	implementation 'ro.andob.androidawt:androidawt:1.0.2'
+	implementation 'ro.andob.androidawt:androidawt:1.0.3'
 }
 ```
 
@@ -31,8 +31,8 @@ repositories {
 
 ```
 dependencies {
-	implementation 'com.github.librepdf:openpdf:1.3.8'
-	implementation 'ro.andob.androidawt:androidawt:1.0.2'
+	implementation 'com.github.librepdf:openpdf:1.3.24'
+	implementation 'ro.andob.androidawt:androidawt:1.0.3'
 }
 ```
 
