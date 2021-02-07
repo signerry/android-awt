@@ -29,6 +29,7 @@ import java.util.HashMap;
 /**
  * This class is a wrapper for the native CMM library
  */
+//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/lcmm/shared
 public class NativeCMM {
 
     /**
@@ -78,7 +79,8 @@ public class NativeCMM {
             AccessController.doPrivileged(
                   new PrivilegedAction<Void>() {
                     public Void run() {
-                        org.apache.harmony.awt.Utils.loadLibrary("lcmm"); //$NON-NLS-1$
+                        //todo load lcmm
+                        System.loadLibrary("lcmm");
                         return null;
                     }
             } );

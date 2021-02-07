@@ -41,11 +41,6 @@ public class ConvolveOp implements BufferedImageOp, RasterOp {
     private int edgeCond;
     private RenderingHints rhs = null;
 
-    static {
-        // TODO
-        //System.loadLibrary("imageops");
-    }
-
     public ConvolveOp(Kernel kernel, int edgeCondition, RenderingHints hints) {
         this.kernel = kernel;
         this.edgeCond = edgeCondition;

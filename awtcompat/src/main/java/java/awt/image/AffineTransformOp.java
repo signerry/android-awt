@@ -41,11 +41,6 @@ public class AffineTransformOp implements BufferedImageOp, RasterOp {
     private AffineTransform at;
     private RenderingHints hints;
 
-    static {
-        // TODO - uncomment
-        //System.loadLibrary("imageops");
-    }
-
     public AffineTransformOp(AffineTransform xform, RenderingHints hints) {
         this(xform, TYPE_NEAREST_NEIGHBOR);
         this.hints = hints;

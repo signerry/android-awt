@@ -42,9 +42,6 @@ public class LookupOp implements BufferedImageOp, RasterOp {
     static int levelInitializer[] = new int[0x10000];
 
     static {
-        // TODO
-        // System.loadLibrary("imageops");
-
         for (int i=1; i<=0x10000; i++) {
             levelInitializer[i-1] = i;
         }

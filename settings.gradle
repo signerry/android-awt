@@ -1,1 +1,2 @@
+include ':devenv'
 include ':awtcompat'

@@ -19,8 +19,6 @@ package org.apache.harmony.awt;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
 
 public final class Utils {
 
@@ -34,27 +32,5 @@ public final class Utils {
                 return System.getProperty(name, value);
             }
         });
-    }
-
-    public static void loadLibrary(final String name)
-                    throws UnsatisfiedLinkError, NullPointerException {
-        try {
-            AccessController.doPrivileged(new PrivilegedExceptionAction<Object>() {
-                public Object run() {
-                    System.loadLibrary(name);
-                    return null;
-                }
-            });
-        } catch (final PrivilegedActionException ex) {
-            final Throwable cause = ex.getCause();
-
-            if (cause instanceof UnsatisfiedLinkError) {
-                throw (UnsatisfiedLinkError) cause;
-            }
-
-            if (cause instanceof NullPointerException) {
-                throw (NullPointerException) cause;
-            }
-        }
     }
 }

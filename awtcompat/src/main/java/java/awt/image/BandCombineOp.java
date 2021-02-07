@@ -46,11 +46,6 @@ public class BandCombineOp implements RasterOp {
     private float matrix[][];
     private RenderingHints rHints;
 
-    static {
-        // XXX - todo
-        //System.loadLibrary("imageops");
-    }
-
     public BandCombineOp(float matrix[][], RenderingHints hints) {
         this.mxHeight = matrix.length;
         this.mxWidth = matrix[0].length;

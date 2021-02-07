@@ -32,7 +32,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
-
+//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/jpegdecoder
 public class JpegDecoder extends ImageDecoder {
     // Only 2 output colorspaces expected. Others are converted into
     // these ones.
@@ -83,7 +83,8 @@ public class JpegDecoder extends ImageDecoder {
     private ColorModel cm = null;
 
     static {
-        org.apache.harmony.awt.Utils.loadLibrary("jpegdecoder"); //$NON-NLS-1$
+        //todo load jpeg decoder
+        System.loadLibrary("jpegdecoder");
 
         cmGray = new ComponentColorModel(
                 ColorSpace.getInstance(ColorSpace.CS_GRAY),

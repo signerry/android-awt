@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
-
+//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/gl
 public class GifDecoder extends ImageDecoder {
 
     // ImageConsumer hints: common
@@ -87,17 +87,17 @@ public class GifDecoder extends ImageDecoder {
         buffer = new byte[buffer_size];
     }
 
-//    private static native int[] toRGB(byte imageData[], byte colormap[], int transparentColor);
-//
-//    private static native void releaseNativeDecoder(long hDecoder);
-//
-//    private native int decode(
-//            byte input[],
-//            int bytesInBuffer,
-//            long hDecoder,
-//            GifDataStream dataStream,
-//            GifGraphicBlock currBlock
-//            );
+    private static native int[] toRGB(byte imageData[], byte colormap[], int transparentColor);
+
+    private static native void releaseNativeDecoder(long hDecoder);
+
+    private native int decode(
+            byte input[],
+            int bytesInBuffer,
+            long hDecoder,
+            GifDataStream dataStream,
+            GifGraphicBlock currBlock
+            );
 
     private int[] getScreenRGBBuffer() {
         if (screenRGBBuffer == null) {
@@ -105,12 +105,12 @@ public class GifDecoder extends ImageDecoder {
                 int transparentColor =
                         gifDataStream.logicalScreen.globalColorTable.cm.getTransparentPixel();
                 transparentColor = transparentColor > 0 ? transparentColor : IMPOSSIBLE_VALUE;
-//                screenRGBBuffer =
-//                        toRGB(
-//                                screenBuffer,
-//                                gifDataStream.logicalScreen.globalColorTable.colors,
-//                                transparentColor
-//                        );
+                screenRGBBuffer =
+                        toRGB(
+                                screenBuffer,
+                                gifDataStream.logicalScreen.globalColorTable.colors,
+                                transparentColor
+                        );
             } else {
                 int size = gifDataStream.logicalScreen.logicalScreenHeight *
                         gifDataStream.logicalScreen.logicalScreenWidth;
@@ -192,13 +192,12 @@ public class GifDecoder extends ImageDecoder {
                 // since native decoder uses java buffer and doesn't have its own
                 // buffer. So it adds this number to the number of bytes left
                 // in buffer from the previous call.
-                int numLines = 0;
-//                int numLines = decode(
-//                        buffer,
-//                        bytesRead,
-//                        hNativeDecoder,
-//                        gifDataStream,
-//                        currBlock);
+                int numLines = decode(
+                        buffer,
+                        bytesRead,
+                        hNativeDecoder,
+                        gifDataStream,
+                        currBlock);
 
                 // Keep track on how much bytes left in buffer
                 bytesInBuffer -= bytesConsumed;
@@ -241,7 +240,7 @@ public class GifDecoder extends ImageDecoder {
                 }
 
                 if (eosReached && numLines == 0) { // Maybe image is truncated...
-//                    releaseNativeDecoder(hNativeDecoder);
+                    releaseNativeDecoder(hNativeDecoder);
                     break;
                 }
             }

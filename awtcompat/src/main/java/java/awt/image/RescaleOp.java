@@ -37,11 +37,6 @@ public class RescaleOp implements BufferedImageOp, RasterOp {
     private float offsets[];
     private RenderingHints hints;
 
-    static {
-        // TODO
-        //System.loadLibrary("imageops");
-    }
-
     public RescaleOp(float[] scaleFactors, float[] offsets, RenderingHints hints) {
         int numFactors = Math.min(scaleFactors.length, offsets.length);
 
