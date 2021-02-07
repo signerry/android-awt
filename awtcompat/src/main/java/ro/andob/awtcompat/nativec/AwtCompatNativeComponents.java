@@ -29,7 +29,6 @@ public class AwtCompatNativeComponents
 
     public static native String getHelloWorldMesssage();
 
-    //todo https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/lcmm/shared
     public static native long cmmOpenProfile(byte[] data);
     public static native void cmmCloseProfile(long profileID);
     public static native int cmmGetProfileSize(long profileID);
@@ -41,7 +40,6 @@ public class AwtCompatNativeComponents
     public static native void cmmDeleteTransform(long transformHandle);
     public static native void cmmTranslateColors(long transformHandle, NativeImageFormat src, NativeImageFormat dest);
 
-    //todo https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/gl
     public static native int[] gifDecoder_toRGB(byte imageData[], byte colormap[], int transparentColor);
     public static native void gifDecoder_releaseNativeDecoder(long hDecoder);
     public static native int gifDecoder_decode(byte input[], int bytesInBuffer, long hDecoder,
@@ -49,11 +47,9 @@ public class AwtCompatNativeComponents
                                                GifDecoder.GifGraphicBlock currBlock,
                                                NativePointerContainer hDecoderContainer);
 
-    //todo https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/gl
     public static native long pngDecoder_decode(byte[] input, int bytesInBuffer, long hDecoder);
     public static native void pngDecoder_releaseNativeDecoder(long hDecoder);
 
-    //todo https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/jpegdecoder
     public static native void jpegDecoder_releaseNativeDecoder(long hDecoder);
     public static native Object jpegDecoder_decode(byte[] input, int bytesInBuffer, long hDecoder,
                                                    NativePointerContainer hDecoderContainer);
