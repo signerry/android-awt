@@ -9,4 +9,6 @@ echo "Publishing..."
 
 ./gradlew :awtcompat:publish
 
+read -s -r MAVEN_PUBLISH_PASSWORD
+
 set +o allexport
