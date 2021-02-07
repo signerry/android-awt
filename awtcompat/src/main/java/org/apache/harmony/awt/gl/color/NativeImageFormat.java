@@ -43,7 +43,7 @@ import java.util.ArrayList;
  * Samples other than 1 - 7 bytes and multiple of 8 bits are
  * also handled as custom (and won't be supported in the nearest future).
  */
-class NativeImageFormat {
+public class NativeImageFormat {
     //////////////////////////////////////////////
     //  LCMS Pixel types
     private static final int PT_ANY = 0;    // Don't check colorspace
@@ -110,10 +110,6 @@ class NativeImageFormat {
 
     // Has the image alpha channel? If has - here its band band offset goes
     private int alphaOffset = -1;
-
-    static {
-        NativeCMM.loadCMM();
-    }
 
     ////////////////////////////////////
     // LCMS image format encoders

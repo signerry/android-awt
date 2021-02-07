@@ -32,7 +32,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
-//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/jpegdecoder
+import ro.andob.awtcompat.nativec.AwtCompatNativeComponents;
+
 public class JpegDecoder extends ImageDecoder {
     // Only 2 output colorspaces expected. Others are converted into
     // these ones.
@@ -83,9 +84,6 @@ public class JpegDecoder extends ImageDecoder {
     private ColorModel cm = null;
 
     static {
-        //todo load jpeg decoder
-        System.loadLibrary("jpegdecoder");
-
         cmGray = new ComponentColorModel(
                 ColorSpace.getInstance(ColorSpace.CS_GRAY),
                 false, false,
@@ -123,12 +121,16 @@ public class JpegDecoder extends ImageDecoder {
     /**
      * @return - not NULL if call is successful
      */
-    private native Object decode(
-            byte[] input,
-            int bytesInBuffer,
-            long hDecoder);
+    private Object decode(byte[] input, int bytesInBuffer, long hDecoder) {
+        AwtCompatNativeComponents.NativePointerContainer hDecoderContainer = new AwtCompatNativeComponents.NativePointerContainer(this.hNativeDecoder);
+        Object result = AwtCompatNativeComponents.jpegDecoder_decode(input, bytesInBuffer, hDecoder, hDecoderContainer);
+        this.hNativeDecoder = hDecoderContainer.pointer;
+        return result;
+    }
 
-    private static native void releaseNativeDecoder(long hDecoder);
+    private static void releaseNativeDecoder(long hDecoder) {
+        AwtCompatNativeComponents.jpegDecoder_releaseNativeDecoder(hDecoder);
+    }
 
     @Override
     public void decodeImage() throws IOException {

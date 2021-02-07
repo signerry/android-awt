@@ -36,7 +36,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
-//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/gl
+import ro.andob.awtcompat.nativec.AwtCompatNativeComponents;
+
 public class PngDecoder extends ImageDecoder {
 
     private static final int hintflags =
@@ -80,9 +81,13 @@ public class PngDecoder extends ImageDecoder {
     int updateFromScanline; // First scanline to update
     int numScanlines; // Number of scanlines to update
 
-    private native long decode(byte[] input, int bytesInBuffer, long hDecoder);
+    private static long decode(byte[] input, int bytesInBuffer, long hDecoder) {
+        return AwtCompatNativeComponents.pngDecoder_decode(input, bytesInBuffer, hDecoder);
+    }
 
-    private static native void releaseNativeDecoder(long hDecoder);
+    private static void releaseNativeDecoder(long hDecoder) {
+        AwtCompatNativeComponents.pngDecoder_releaseNativeDecoder(hDecoder);
+    }
 
     public PngDecoder(DecodingImageSource src, InputStream is) {
         super(src, is);

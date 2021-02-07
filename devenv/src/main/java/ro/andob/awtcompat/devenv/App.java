@@ -1,11 +1,16 @@
 package ro.andob.awtcompat.devenv;
 
 import android.app.Application;
+import android.widget.Toast;
+import ro.andob.awtcompat.nativec.AwtCompatNativeComponents;
 
 public class App extends Application
 {
-    static
+    @Override
+    public void onCreate()
     {
-        //System.loadLibrary("lcmm");
+        super.onCreate();
+
+        Toast.makeText(this, AwtCompatNativeComponents.getHelloWorldMesssage(), Toast.LENGTH_LONG).show();
     }
 }

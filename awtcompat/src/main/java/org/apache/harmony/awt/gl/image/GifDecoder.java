@@ -28,7 +28,8 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 
-//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/gl
+import ro.andob.awtcompat.nativec.AwtCompatNativeComponents;
+
 public class GifDecoder extends ImageDecoder {
 
     // ImageConsumer hints: common
@@ -87,17 +88,20 @@ public class GifDecoder extends ImageDecoder {
         buffer = new byte[buffer_size];
     }
 
-    private static native int[] toRGB(byte imageData[], byte colormap[], int transparentColor);
+    private static int[] toRGB(byte imageData[], byte colormap[], int transparentColor) {
+        return AwtCompatNativeComponents.gifDecoder_toRGB(imageData, colormap, transparentColor);
+    }
 
-    private static native void releaseNativeDecoder(long hDecoder);
+    private static void releaseNativeDecoder(long hDecoder) {
+        AwtCompatNativeComponents.gifDecoder_releaseNativeDecoder(hDecoder);
+    }
 
-    private native int decode(
-            byte input[],
-            int bytesInBuffer,
-            long hDecoder,
-            GifDataStream dataStream,
-            GifGraphicBlock currBlock
-            );
+    private int decode(byte input[], int bytesInBuffer, long hDecoder, GifDataStream dataStream, GifGraphicBlock currBlock) {
+        AwtCompatNativeComponents.NativePointerContainer hDecoderContainer = new AwtCompatNativeComponents.NativePointerContainer(this.hNativeDecoder);
+        int result = AwtCompatNativeComponents.gifDecoder_decode(input, bytesInBuffer, hDecoder, dataStream, currBlock, hDecoderContainer);
+        this.hNativeDecoder = hDecoderContainer.pointer;
+        return result;
+    }
 
     private int[] getScreenRGBBuffer() {
         if (screenRGBBuffer == null) {
@@ -316,7 +320,7 @@ public class GifDecoder extends ImageDecoder {
         setProperties(properties);
     }
 
-    class GifDataStream {
+    public class GifDataStream {
         //  Indicates that reading of the whole data stream accomplished
         boolean completed = false;
 
@@ -343,7 +347,7 @@ public class GifDecoder extends ImageDecoder {
         GifColorTable globalColorTable = new GifColorTable();
     }
 
-    class GifGraphicBlock {
+    public class GifGraphicBlock {
         //  Indicates that reading of this block accomplished
         boolean completed = false;
 

@@ -18,18 +18,14 @@
  * @author Oleg V. Khaschansky
  */
 package org.apache.harmony.awt.gl.color;
-
 import java.awt.color.ICC_Profile;
-
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.HashMap;
+import ro.andob.awtcompat.nativec.AwtCompatNativeComponents;
 
 
 /**
  * This class is a wrapper for the native CMM library
  */
-//todo fix this - https://github.com/apache/harmony/tree/trunk/classlib/modules/awt/src/main/native/lcmm/shared
 public class NativeCMM {
 
     /**
@@ -37,8 +33,6 @@ public class NativeCMM {
      * in ICC_Profile, but we need access to them.
      */
     private static HashMap<ICC_Profile, Long> profileHandles = new HashMap<ICC_Profile, Long>();
-
-    private static boolean isCMMLoaded;
 
     public static void addHandle(ICC_Profile key, long handle) {
         profileHandles.put(key, new Long(handle));
@@ -53,43 +47,45 @@ public class NativeCMM {
     }
 
     /* ICC profile management */
-    public static native long cmmOpenProfile(byte[] data);
-    public static native void cmmCloseProfile(long profileID);
-    public static native int cmmGetProfileSize(long profileID);
-    public static native void cmmGetProfile(long profileID, byte[] data);
-    public static native int cmmGetProfileElementSize(long profileID, int signature);
-    public static native void cmmGetProfileElement(long profileID, int signature,
-                                           byte[] data);
-    public static native void cmmSetProfileElement(long profileID, int tagSignature,
-                                           byte[] data);
+    public static long cmmOpenProfile(byte[] data) {
+        return AwtCompatNativeComponents.cmmOpenProfile(data);
+    }
+
+    public static void cmmCloseProfile(long profileID) {
+        AwtCompatNativeComponents.cmmCloseProfile(profileID);
+    }
+
+    public static int cmmGetProfileSize(long profileID) {
+        return AwtCompatNativeComponents.cmmGetProfileSize(profileID);
+    }
+
+    public static void cmmGetProfile(long profileID, byte[] data) {
+        AwtCompatNativeComponents.cmmGetProfile(profileID, data);
+    }
+
+    public static int cmmGetProfileElementSize(long profileID, int signature) {
+        return AwtCompatNativeComponents.cmmGetProfileElementSize(profileID, signature);
+    }
+
+    public static void cmmGetProfileElement(long profileID, int signature, byte[] data) {
+        AwtCompatNativeComponents.cmmGetProfileElement(profileID, signature, data);
+    }
+
+    public static void cmmSetProfileElement(long profileID, int tagSignature, byte[] data) {
+        AwtCompatNativeComponents.cmmSetProfileElement(profileID, tagSignature, data);
+    }
 
 
     /* ICC transforms */
-    public static native long cmmCreateMultiprofileTransform(
-            long[] profileHandles,
-            int[] renderingIntents
-        );
-    public static native void cmmDeleteTransform(long transformHandle);
-    public static native void cmmTranslateColors(long transformHandle,
-            NativeImageFormat src,
-            NativeImageFormat dest);
-
-    static void loadCMM() {
-        if (!isCMMLoaded) {
-            AccessController.doPrivileged(
-                  new PrivilegedAction<Void>() {
-                    public Void run() {
-                        //todo load lcmm
-                        System.loadLibrary("lcmm");
-                        return null;
-                    }
-            } );
-            isCMMLoaded = true;
-        }
+    public static long cmmCreateMultiprofileTransform(long[] profileHandles, int[] renderingIntents) {
+        return AwtCompatNativeComponents.cmmCreateMultiprofileTransform(profileHandles, renderingIntents);
     }
 
-    /* load native CMM library */
-    static {
-        loadCMM();
+    public static void cmmDeleteTransform(long transformHandle) {
+        AwtCompatNativeComponents.cmmDeleteTransform(transformHandle);
+    }
+
+    public static void cmmTranslateColors(long transformHandle, NativeImageFormat src, NativeImageFormat dest) {
+        AwtCompatNativeComponents.cmmTranslateColors(transformHandle, src, dest);
     }
 }
