@@ -10,7 +10,7 @@ these classes on Android. Code is taken from Apache Harmony, Apache Commons Imag
 
 ```
 repositories {
-    maven { url "http://maven.andob.info/repository/open_source" }
+    maven { url "https://maven.andob.info/repository/open_source" }
 }
 ```
 
@@ -25,7 +25,7 @@ dependencies {
 
 ```
 repositories {
-    maven { url "http://maven.andob.info/repository/open_source" }
+    maven { url "https://maven.andob.info/repository/open_source" }
 }
 ```
 
