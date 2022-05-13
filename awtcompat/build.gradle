@@ -15,6 +15,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    publishing {
+        singleVariant("release") {}
+    }
     ndkVersion "22.0.7026061"
     externalNativeBuild {
         cmake {
@@ -40,11 +43,11 @@ project.afterEvaluate {
                 }
             }
 
-            maven(MavenPublication) {
+            release(MavenPublication) {
+                from components.release
                 groupId 'ro.andob.androidawt'
                 artifactId 'androidawt'
                 version '1.0.4'
-                artifact(bundleReleaseAar)
             }
         }
     }
