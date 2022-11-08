@@ -8,7 +8,7 @@ these classes on Android. Code is taken from Apache Harmony, Apache Commons Imag
 
 ### Disclaimer: This library is hackish and experimental. You should not use this in production. Only critical issues will be fixed.
 
-### It started as a proof-of-concept to make [OpenPDF](https://github.com/LibrePDF/OpenPDF) [work on Android](https://github.com/LibrePDF/OpenPDF/issues/118). I never used it nor OpenPDF in production.
+### It started as a proof-of-concept to make [OpenPDF](https://github.com/LibrePDF/OpenPDF) [work on Android](https://github.com/LibrePDF/OpenPDF/issues/118). I never used it in production.
 
 
 To generate PDF files locally on an Android Device, there are a lot of commercial and open source options:
