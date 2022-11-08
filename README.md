@@ -4,7 +4,7 @@
 ### This is a fork of [windwardadmin/android-awt](https://github.com/windwardadmin/android-awt)
 
 This project provides java.awt and javax.imagio since we can't use 
-these classes on Android. Code is taken from Apache Harmony, Apache Commons Imaging and [witwall/appengine-awt](https://github.com/witwall/appengine-awt).
+these classes on Android. Code is took from Apache Harmony, Apache Commons Imaging and [witwall/appengine-awt](https://github.com/witwall/appengine-awt).
 
 ### Disclaimer: This library is hackish and experimental. You should not use this in production. Only critical issues will be fixed.
 
