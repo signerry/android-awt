@@ -6,7 +6,7 @@
 This project provides java.awt and javax.imagio since we can't use 
 these classes on Android. Code is took from Apache Harmony, Apache Commons Imaging and [witwall/appengine-awt](https://github.com/witwall/appengine-awt).
 
-### Disclaimer: This library is hackish and experimental. You should not use this in production. Only critical issues will be fixed.
+### Disclaimer: This library is HACKISH and experimental. You should NOT use this in production. Only critical issues will be fixed.
 
 ### It started as a proof-of-concept to make [OpenPDF](https://github.com/LibrePDF/OpenPDF) [work on Android](https://github.com/LibrePDF/OpenPDF/issues/118). I never used it in production.
 
