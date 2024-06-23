@@ -36,7 +36,7 @@ project.afterEvaluate {
     publishing {
         publications {
             repositories.maven {
-                url 'https://maven.pkg.github.com/signerry'
+                url 'https://maven.pkg.github.com/signerry/android-awt'
                 credentials {
                     username = System.getenv("GPR_USER")
                     password = System.getenv("GPR_API_KEY")
