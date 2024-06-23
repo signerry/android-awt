@@ -1,0 +1,25 @@
+name: "Android CI"
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish-snapshot:
+    name: Publish github packages
+    runs-on: ubuntu-latest
+    if: "github.event_name == 'push'"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure JDK
+        uses: actions/setup-java@v3.3.0
+        with:
+          java-version: 11
+          distribution: 'adopt'
+
+      - name: Upload Snapshot
+        run: ./gradlew :awtcompat:publish
+        env:
+          GPR_USER: ${{ secrets.GITHUB_ACTOR }}
+          GPR_API_KEY: ${{ secrets.GPR_API_KEY }}

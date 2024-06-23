@@ -23,13 +23,19 @@ To generate PDF files locally on an Android Device, there are a lot of commercia
 
 ```
 repositories {
-    maven { url "https://maven.andob.info/repository/open_source" }
+    maven { 
+        url 'https://maven.pkg.github.com/signerry'
+        credentials {
+            username = System.getenv("GPR_USER")
+            password = System.getenv("GPR_API_KEY")
+        }
+    }
 }
 ```
 
 ```
 dependencies {
-	implementation 'ro.andob.androidawt:androidawt:1.0.4'
+	implementation 'com.signerry:androidawt:1.0.4'
 }
 ```
 

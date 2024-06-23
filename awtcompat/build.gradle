@@ -2,10 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 30
     defaultConfig {
+        compileSdk 34
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0.0"
     }
@@ -36,16 +36,16 @@ project.afterEvaluate {
     publishing {
         publications {
             repositories.maven {
-                url 'https://maven.andob.info/repository/open_source/'
+                url 'https://maven.pkg.github.com/signerry'
                 credentials {
-                    username "$System.env.MAVEN_PUBLISH_USERNAME"
-                    password "$System.env.MAVEN_PUBLISH_PASSWORD"
+                    username = System.getenv("GPR_USER")
+                    password = System.getenv("GPR_API_KEY")
                 }
             }
 
             release(MavenPublication) {
                 from components.release
-                groupId 'ro.andob.androidawt'
+                groupId 'com.signerry'
                 artifactId 'androidawt'
                 version '1.0.4'
             }
