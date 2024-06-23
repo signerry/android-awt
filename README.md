@@ -3,6 +3,8 @@
 
 ### This is a fork of [windwardadmin/android-awt](https://github.com/windwardadmin/android-awt)
 
+[![Android CI](https://github.com/signerry/android-awt/actions/workflows/android-ci.yml/badge.svg)](https://github.com/signerry/android-awt/actions/workflows/android-ci.yml)
+
 This project provides java.awt and javax.imagio since we can't use 
 these classes on Android. Code is took from Apache Harmony, Apache Commons Imaging and [witwall/appengine-awt](https://github.com/witwall/appengine-awt).
 
